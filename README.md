@@ -1,1 +1,3 @@
-# my_au_bot
+# my_au-bot
+txt
+pyTelegram Bot API openai
