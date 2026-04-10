@@ -1,22 +1,16 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import Application, CommandHandler
 import os
 
-# Команда /start
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Привет! Я работаю на Render!")
+async def start(update, context):
+    await update.message.reply_text("Бот работает!")
 
 def main():
-    # Берём токен из переменной окружения
     token = os.getenv("TG_TOKEN")
+    app = Application.builder().token(token).build()
 
-    app = ApplicationBuilder().token(token).build()
-
-    # Регистрируем команду
     app.add_handler(CommandHandler("start", start))
 
-    # Запуск (БЕЗ asyncio.run !!!)
-    app.run_polling()
+    app.run_polling()   # <<< БЕЗ await и БЕЗ asyncio.run
 
 if __name__ == "__main__":
     main()
